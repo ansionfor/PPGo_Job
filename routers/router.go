@@ -7,12 +7,13 @@ import (
 
 func init() {
 	// 默认登录
-	beego.Router("/", &controllers.LoginController{}, "*:Login")
-	beego.Router("/login_in", &controllers.LoginController{}, "*:LoginIn")
-	beego.Router("/login_out", &controllers.LoginController{}, "*:LoginOut")
-	beego.Router("/help", &controllers.HomeController{}, "*:Help")
-	beego.Router("/home", &controllers.HomeController{}, "*:Index")
-	beego.Router("/home/start", &controllers.HomeController{}, "*:Start")
+	siteDir := beego.AppConfig.String("site.dir")
+	beego.Router(siteDir + "/", &controllers.LoginController{}, "*:Login")
+	beego.Router(siteDir + "/login_in", &controllers.LoginController{}, "*:LoginIn")
+	beego.Router(siteDir + "/login_out", &controllers.LoginController{}, "*:LoginOut")
+	beego.Router(siteDir + "/help", &controllers.HomeController{}, "*:Help")
+	beego.Router(siteDir + "/home", &controllers.HomeController{}, "*:Index")
+	beego.Router(siteDir + "/home/start", &controllers.HomeController{}, "*:Start")
 
 	beego.AutoRouter(&controllers.TaskController{})
 	beego.AutoRouter(&controllers.GroupController{})
